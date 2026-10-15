@@ -10,11 +10,52 @@ SrotGraph processes continuous or recorded audio, video and text streams, extrac
 
 ## System Architecture
 
-![SrotGraph Architecture](assets/architecture-diagram.svg)
+![SrotGraph Architecture](assets/architecture-diagram.svg)---
+
+## Mathematical Formulation
+
+![Mathematical Formulation](assets/mathematical-formulation.svg)
 
 ---
 
+## Neural Network Architecture
 
+![Neural Network Architecture](assets/neural-network.svg)
+
+---
+
+## Evidence Gathering Pipeline
+
+![Evidence Gathering Pipeline](assets/evidence-pipeline.svg)
+
+---
+
+## Mathematical Terms
+
+| Symbol | Term | Definition |
+|--------|------|------------|
+| \(C\) | Claim Set | \(C = \{c_1, c_2, ..., c_n\}\) — all extracted claims from a stream |
+| \(c_i\) | Claim | A single claim: \((t_{start}, t_{end}, text, confidence)\) |
+| \(s(c)\) | Confidence Score | \(P(valid \mid c, context)\) — probability claim is valid given context |
+| \(s'(c)\) | Updated Score | \(s'(c) \propto s(c) \cdot \mathcal{L}(evidence \mid c)\) — Bayesian update with evidence |
+| \(w(e)\) | Evidence Weight | \(w(e) = \alpha \cdot r_s + \beta \cdot v_e + \gamma \cdot t_e\) — composite evidence quality |
+| \(\alpha, \beta, \gamma\) | Weights | Learned weights for source reliability, verification, and temporal proximity |
+| \(r_s\) | Source Reliability | Reliability score of the evidence source (0–1) |
+| \(v_e\) | Evidence Verification | Whether evidence has been verified (0 or 1) |
+| \(t_e\) | Temporal Proximity | Time distance between evidence and claim |
+| \(G\) | Relationship Graph | \(G = (V, E)\) where \(V = C \cup R\) — claims and relationships as vertices |
+| \(e_{ij}\) | Edge | \((c_i, c_j, type, confidence)\) — relationship between two claims |
+| \(type\) | Relation Type | \(\in \{\text{supports}, \text{contradicts}, \text{corroborates}, \text{related}\}\) |
+| \(C^v\) | Claim Version | \(C^v = \{c^v_1, c^v_2, ..., c^v_k\}\) — version history of a claim |
+| \(\Delta(c)\) | Edit Distance | \(\text{edit\_distance}(c^v_k, c^v_{k+1})\) — change magnitude between versions |
+| \(L\) | Information Loss | \(L = 1 - \frac{\|C_{correct}\|}{\|C_{total}\|}\) — proportion of missed claims |
+| \(L_{precision}\) | Precision Loss | \(L_p = \frac{TP}{TP + FP}\) — fraction of extracted claims that are correct |
+| \(L_{recall}\) | Recall Loss | \(L_r = \frac{TP}{TP + FN}\) — fraction of true claims that were extracted |
+| \(TP\) | True Positive | Correctly extracted claim |
+| \(FP\) | False Positive | Incorrectly extracted claim |
+| \(FN\) | False Negative | Missed claim (not extracted) |
+
+---
 
 ## Repository Structure
 

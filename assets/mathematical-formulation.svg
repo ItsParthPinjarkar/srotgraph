@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c0a1d"/>
+      <stop offset="100%" style="stop-color:#1a0e2e"/>
+    </linearGradient>
+    <linearGradient id="formulaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="50%" style="stop-color:#f472b6"/>
+      <stop offset="100%" style="stop-color:#38bdf8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <style>
+      text { font-family: 'Cambria', 'Georgia', 'Times New Roman', serif; }
+      .title { font-size: 26px; font-weight: 700; fill: #e0e7ff; letter-spacing: 2; }
+      .section-label { font-size: 12px; fill: #818cf8; font-weight: 600; letter-spacing: 2; }
+      .formula { font-size: 18px; fill: url(#formulaGrad); filter: url(#glow); }
+      .variable { font-size: 14px; fill: #c4b5fd; }
+      .description { font-size: 11px; fill: #a5b4fc; }
+      .index { font-size: 11px; fill: #7c3aed; }
+      .card { fill: #15122e; stroke: #4f46e5; stroke-width: 1; }
+      .accent-line { stroke: #818cf8; stroke-width: 1; opacity: 0.3; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+      @keyframes glow-pulse { 0%,100% { filter: url(#glow); opacity: 0.7; } 50% { filter: url(#glow); opacity: 1; } }
+      .formula-anim { animation: glow-pulse 3s ease-in-out infinite; }
+      .card-anim { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="620" rx="12" fill="url(#bgGrad)"/>
+
+  <!-- Background grid -->
+  <g stroke="#4f46e5" stroke-width="0.3" opacity="0.15">
+    <line x1="0" y1="50" x2="900" y2="50"/><line x1="0" y1="100" x2="900" y2="100"/>
+    <line x1="0" y1="150" x2="900" y2="150"/><line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="250" x2="900" y2="250"/><line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="0" y1="350" x2="900" y2="350"/><line x1="0" y1="400" x2="900" y2="400"/>
+    <line x1="0" y1="450" x2="900" y2="450"/><line x1="0" y1="500" x2="900" y2="500"/>
+    <line x1="0" y1="550" x2="900" y2="550"/><line x1="0" y1="600" x2="900" y2="600"/>
+    <line x1="50" y1="0" x2="50" y2="620"/><line x1="100" y1="0" x2="100" y2="620"/>
+    <line x1="150" y1="0" x2="150" y2="620"/><line x1="200" y1="0" x2="200" y2="620"/>
+    <line x1="250" y1="0" x2="250" y2="620"/><line x1="300" y1="0" x2="300" y2="620"/>
+    <line x1="350" y1="0" x2="350" y2="620"/><line x1="400" y1="0" x2="400" y2="620"/>
+    <line x1="450" y1="0" x2="450" y2="620"/><line x1="500" y1="0" x2="500" y2="620"/>
+    <line x1="550" y1="0" x2="550" y2="620"/><line x1="600" y1="0" x2="600" y2="620"/>
+    <line x1="650" y1="0" x2="650" y2="620"/><line x1="700" y1="0" x2="700" y2="620"/>
+    <line x1="750" y1="0" x2="750" y2="620"/><line x1="800" y1="0" x2="800" y2="620"/>
+    <line x1="850" y1="0" x2="850" y2="620"/>
+  </g>
+
+  <!-- Title -->
+  <text x="450" y="40" text-anchor="middle" class="title">Mathematical Formulation</text>
+  <text x="450" y="60" text-anchor="middle" class="section-label">ERROR-CORRECTING CODES MEET GRAPH-BASED CLAIM TRACKING</text>
+
+  <line x1="150" y1="72" x2="750" y2="72" class="accent-line"/>
+
+  <!-- Card 1: Claim Extraction -->
+  <rect x="40" y="90" width="400" height="130" rx="10" class="card" filter="url(#cardShadow)"/>
+  <rect x="45" y="95" width="390" height="3" rx="1.5" fill="url(#formulaGrad)" opacity="0.6"/>
+  <text x="55" y="118" class="section-label">1. CLAIM EXTRACTION</text>
+  <text x="55" y="145" class="formula formula-anim">C = {c₁, c₂, ..., cₙ}</text>
+  <text x="55" y="168" class="description">where each claim cᵢ = (t_start, t_end, text, confidence)</text>
+  <text x="55" y="188" class="description">extracted from transcript T via provider P</text>
+
+  <!-- Card 2: Confidence Scoring -->
+  <rect x="460" y="90" width="400" height="130" rx="10" class="card" filter="url(#cardShadow)"/>
+  <rect x="465" y="95" width="390" height="3" rx="1.5" fill="url(#formulaGrad)" opacity="0.6"/>
+  <text x="475" y="118" class="section-label">2. CONFIDENCE SCORING</text>
+  <text x="475" y="148" class="formula formula-anim">s(c) = P(valid | c, context)</text>
+  <text x="475" y="170" class="formula" opacity="0.8">s(c) ∈ [0, 1]</text>
+  <text x="475" y="192" class="description">Bayesian update: s'(c) ∝ s(c) · ℒ(evidence | c)</text>
+
+  <!-- Card 3: Evidence Weight -->
+  <rect x="40" y="240" width="400" height="130" rx="10" class="card" filter="url(#cardShadow)"/>
+  <rect x="45" y="245" width="390" height="3" rx="1.5" fill="url(#formulaGrad)" opacity="0.6"/>
+  <text x="55" y="268" class="section-label">3. EVIDENCE AGGREGATION</text>
+  <text x="55" y="295" class="formula formula-anim">w(e) = α·rₛ + β·vₑ + γ·tₑ</text>
+  <text x="55" y="317" class="description">α, β, γ = learned weights</text>
+  <text x="55" y="335" class="description">rₛ = source reliability, vₑ = evidence verification</text>
+  <text x="55" y="350" class="description">tₑ = temporal proximity to claim</text>
+
+  <!-- Card 4: Relationship Graph -->
+  <rect x="460" y="240" width="400" height="130" rx="10" class="card" filter="url(#cardShadow)"/>
+  <rect x="465" y="245" width="390" height="3" rx="1.5" fill="url(#formulaGrad)" opacity="0.6"/>
+  <text x="475" y="268" class="section-label">4. RELATIONSHIP GRAPH</text>
+  <text x="475" y="296" class="formula formula-anim">G = (V, E) where V = C ∪ R</text>
+  <text x="475" y="316" class="formula" opacity="0.8">eᵢⱼ = (cᵢ, cⱼ, type, confidence)</text>
+  <text x="475" y="336" class="description">type ∈ {supports, contradicts, corroborates, related}</text>
+
+  <!-- Card 5: Claim Evolution -->
+  <rect x="40" y="390" width="400" height="130" rx="10" class="card" filter="url(#cardShadow)"/>
+  <rect x="45" y="395" width="390" height="3" rx="1.5" fill="url(#formulaGrad)" opacity="0.6"/>
+  <text x="55" y="418" class="section-label">5. CLAIM EVOLUTION</text>
+  <text x="55" y="445" class="formula formula-anim">Cᵛ = {cᵛ₁, cᵛ₂, ..., cᵛᵏ}</text>
+  <text x="55" y="467" class="description">Version chain: cᵛᵏ → cᵛᵏ⁺¹</text>
+  <text x="55" y="485" class="description">Δ(c) = edit_distance(cᵛᵏ, cᵛᵏ⁺¹)</text>
+  <text x="55" y="500" class="description">preserves provenance at each version</text>
+
+  <!-- Card 6: Information Loss -->
+  <rect x="460" y="390" width="400" height="130" rx="10" class="card" filter="url(#cardShadow)"/>
+  <rect x="465" y="395" width="390" height="3" rx="1.5" fill="url(#formulaGrad)" opacity="0.6"/>
+  <text x="475" y="418" class="section-label">6. INFORMATION LOSS</text>
+  <text x="475" y="446" class="formula formula-anim">L = 1 - |C_correct| / |C_total|</text>
+  <text x="475" y="468" class="formula" opacity="0.8">L_precision = TP / (TP + FP)</text>
+  <text x="475" y="488" class="formula" opacity="0.8">L_recall = TP / (TP + FN)</text>
+  <text x="475" y="505" class="description">Measures coverage and accuracy of extraction</text>
+
+  <!-- Decorative elements -->
+  <g fill="#818cf8" opacity="0.3">
+    <circle cx="30" cy="30" r="2"/>
+    <circle cx="870" cy="30" r="2"/>
+    <circle cx="30" cy="600" r="2"/>
+    <circle cx="870" cy="600" r="2"/>
+    <circle cx="450" cy="570" r="1.5"/>
+    <circle cx="100" cy="570" r="1.5"/>
+    <circle cx="800" cy="570" r="1.5"/>
+  </g>
+
+  <!-- Greek letter decorative row -->
+  <g font-family="serif" font-size="14" fill="#4f46e5" opacity="0.4" text-anchor="middle">
+    <text x="50" y="560">α</text>
+    <text x="100" y="560">β</text>
+    <text x="150" y="560">γ</text>
+    <text x="200" y="560">δ</text>
+    <text x="250" y="560">ε</text>
+    <text x="300" y="560">θ</text>
+    <text x="350" y="560">λ</text>
+    <text x="400" y="560">μ</text>
+    <text x="450" y="560">π</text>
+    <text x="500" y="560">σ</text>
+    <text x="550" y="560">τ</text>
+    <text x="600" y="560">φ</text>
+    <text x="650" y="560">ψ</text>
+    <text x="700" y="560">ω</text>
+    <text x="750" y="560">Γ</text>
+    <text x="800" y="560">Δ</text>
+    <text x="850" y="560">Σ</text>
+  </g>
+
+  <text x="450" y="595" text-anchor="middle" font-size="10" fill="#4f46e5" opacity="0.5" letter-spacing="3">
+    ∀ claims c ∈ C, evidence e ∈ E, relationships r ∈ R
+  </text>
+</svg>

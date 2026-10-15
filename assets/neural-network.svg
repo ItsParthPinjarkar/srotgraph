@@ -1,0 +1,316 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" width="900" height="580">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="100%" style="stop-color:#150a2e"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#818cf8"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f472b6"/>
+      <stop offset="100%" style="stop-color:#ec4899"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8"/>
+      <stop offset="100%" style="stop-color:#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#c084fc"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, sans-serif; }
+      .title { font-size: 24px; font-weight: 700; fill: #e0e7ff; letter-spacing: 2; }
+      .subtitle { font-size: 11px; fill: #818cf8; letter-spacing: 3; }
+      .layer-label { font-size: 11px; fill: #c4b5fd; font-weight: 600; }
+      .node-label { font-size: 9px; fill: #e0e7ff; text-anchor: middle; }
+      .card-text { font-size: 11px; fill: #a5b4fc; }
+      .card-title { font-size: 12px; fill: #e0e7ff; font-weight: 600; }
+      .arrow { stroke: #4f46e5; stroke-width: 1; opacity: 0.4; }
+      .card { fill: #12102a; stroke: #4f46e5; stroke-width: 1; }
+      .accent-bar { fill: url(#nodeGrad1); }
+      @keyframes nodePulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+      @keyframes glow { 0%,100% { filter: url(#glow); } 50% { filter: url(#glow); opacity: 1; } }
+      .hidden { opacity: 0; }
+      .card:nth-child(12) { animation: fadeIn 0.4s 0.3s forwards; }
+      .card:nth-child(13) { animation: fadeIn 0.4s 0.5s forwards; }
+      .card:nth-child(14) { animation: fadeIn 0.4s 0.7s forwards; }
+      .card:nth-child(15) { animation: fadeIn 0.4s 0.9s forwards; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { * { animation: none !important; opacity: 1 !important; } }
+    </style>
+  </defs>
+
+  <rect width="900" height="580" rx="12" fill="url(#bgGrad)"/>
+
+  <!-- Background dots pattern -->
+  <g fill="#4f46e5" opacity="0.1">
+    <circle cx="50" cy="50" r="1"/><circle cx="150" cy="50" r="1"/><circle cx="250" cy="50" r="1"/>
+    <circle cx="350" cy="50" r="1"/><circle cx="450" cy="50" r="1"/><circle cx="550" cy="50" r="1"/>
+    <circle cx="650" cy="50" r="1"/><circle cx="750" cy="50" r="1"/><circle cx="850" cy="50" r="1"/>
+    <circle cx="50" cy="530" r="1"/><circle cx="150" cy="530" r="1"/><circle cx="250" cy="530" r="1"/>
+    <circle cx="350" cy="530" r="1"/><circle cx="450" cy="530" r="1"/><circle cx="550" cy="530" r="1"/>
+    <circle cx="650" cy="530" r="1"/><circle cx="750" cy="530" r="1"/><circle cx="850" cy="530" r="1"/>
+  </g>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" class="title">Neural Network Architecture</text>
+  <text x="450" y="55" text-anchor="middle" class="subtitle">TRANSFORMER-BASED CLAIM EXTRACTION PIPELINE</text>
+  <line x1="200" y1="65" x2="700" y2="65" stroke="#4f46e5" stroke-width="1" opacity="0.3"/>
+
+  <!-- Input Layer -->
+  <g>
+    <rect x="40" y="90" width="130" height="200" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="45" y="95" width="120" height="4" rx="2" class="accent-bar"/>
+    <text x="105" y="118" class="card-title" text-anchor="middle">INPUT LAYER</text>
+    <text x="105" y="135" class="card-text" text-anchor="middle">Transcript / Text</text>
+    <text x="105" y="150" class="card-text" text-anchor="middle">Chunking</text>
+    <text x="105" y="165" class="card-text" text-anchor="middle">Tokenization</text>
+
+    <!-- Input nodes -->
+    <g>
+      <circle cx="105" cy="195" r="8" fill="url(#nodeGrad1)" opacity="0.9"/>
+      <circle cx="105" cy="220" r="8" fill="url(#nodeGrad1)" opacity="0.8" style="animation-delay: 0.1s"/>
+      <circle cx="105" cy="245" r="8" fill="url(#nodeGrad1)" opacity="0.7" style="animation-delay: 0.2s"/>
+      <circle cx="105" cy="270" r="8" fill="url(#nodeGrad1)" opacity="0.6" style="animation-delay: 0.3s"/>
+      <text x="105" y="199" class="node-label" font-size="8" fill="#fff">t₁</text>
+      <text x="105" y="224" class="node-label" font-size="8" fill="#fff">t₂</text>
+      <text x="105" y="249" class="node-label" font-size="8" fill="#fff">t₃</text>
+      <text x="105" y="274" class="node-label" font-size="8" fill="#fff">...</text>
+    </g>
+  </g>
+
+  <!-- Embedding Layer -->
+  <g>
+    <rect x="195" y="90" width="130" height="200" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="200" y="95" width="120" height="4" rx="2" fill="url(#nodeGrad4)"/>
+    <text x="260" y="118" class="card-title" text-anchor="middle">EMBEDDING</text>
+    <text x="260" y="135" class="card-text" text-anchor="middle">Word Vectors</Text>
+    <text x="260" y="150" class="card-text" text-anchor="middle">Positional Enc.</Text>
+    <text x="260" y="165" class="card-text" text-anchor="middle">768d / 1024d</Text>
+
+    <g>
+      <circle cx="260" cy="195" r="8" fill="url(#nodeGrad4)" opacity="0.9"/>
+      <circle cx="260" cy="220" r="8" fill="url(#nodeGrad4)" opacity="0.8" style="animation-delay: 0.15s"/>
+      <circle cx="260" cy="245" r="8" fill="url(#nodeGrad4)" opacity="0.7" style="animation-delay: 0.25s"/>
+      <circle cx="260" cy="270" r="8" fill="url(#nodeGrad4)" opacity="0.6" style="animation-delay: 0.35s"/>
+      <text x="260" y="199" class="node-label" font-size="8" fill="#fff">e₁</text>
+      <text x="260" y="224" class="node-label" font-size="8" fill="#fff">e₂</text>
+      <text x="260" y="249" class="node-label" font-size="8" fill="#fff">e₃</text>
+      <text x="260" y="274" class="node-label" font-size="8" fill="#fff">...</text>
+    </g>
+  </g>
+
+  <!-- Connection lines between input and embedding -->
+  <g stroke="#4f46e5" stroke-width="0.5" opacity="0.3">
+    <line x1="113" y1="195" x2="252" y2="195"/>
+    <line x1="113" y1="220" x2="252" y2="220"/>
+    <line x1="113" y1="245" x2="252" y2="245"/>
+    <line x1="113" y1="270" x2="252" y2="270"/>
+  </g>
+
+  <!-- Attention Layer -->
+  <g>
+    <rect x="350" y="80" width="180" height="220" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="355" y="85" width="170" height="4" rx="2" fill="url(#nodeGrad2)"/>
+    <text x="440" y="110" class="card-title" text-anchor="middle">SELF-ATTENTION</text>
+    <text x="440" y="128" class="card-text" text-anchor="middle">Multi-Head</Text>
+    <text x="440" y="143" class="card-text" text-anchor="middle">q, k, v projections</Text>
+    <text x="440" y="158" class="card-text" text-anchor="middle">8 / 16 / 32 heads</Text>
+    <text x="440" y="173" class="card-text" text-anchor="middle">Attention:</Text>
+    <text x="440" y="190" class="card-text" text-anchor="middle">softmax(QKᵀ/√d)V</Text>
+
+    <!-- Attention matrix visual -->
+    <rect x="370" y="200" width="140" height="60" rx="4" fill="#1a1535" stroke="#f472b6" stroke-width="0.5"/>
+    <g fill="#f472b6" opacity="0.6">
+      <rect x="375" y="205" width="8" height="8"/>
+      <rect x="386" y="205" width="8" height="8"/>
+      <rect x="397" y="205" width="8" height="8"/>
+      <rect x="408" y="205" width="8" height="8"/>
+      <rect x="375" y="216" width="8" height="8"/>
+      <rect x="397" y="216" width="8" height="8"/>
+      <rect x="419" y="216" width="8" height="8"/>
+      <rect x="375" y="227" width="8" height="8"/>
+      <rect x="386" y="227" width="8" height="8"/>
+      <rect x="408" y="227" width="8" height="8"/>
+      <rect x="430" y="227" width="8" height="8"/>
+      <rect x="397" y="238" width="8" height="8"/>
+      <rect x="408" y="238" width="8" height="8"/>
+      <rect x="430" y="238" width="8" height="8"/>
+      <rect x="441" y="238" width="8" height="8"/>
+    </g>
+    <text x="440" y="275" class="card-text" text-anchor="middle">Attention Weights</text>
+  </g>
+
+  <!-- FFN Layer -->
+  <g>
+    <rect x="555" y="90" width="140" height="200" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="560" y="95" width="130" height="4" rx="2" fill="url(#nodeGrad3)"/>
+    <text x="625" y="118" class="card-title" text-anchor="middle">FFN LAYER</text>
+    <text x="625" y="135" class="card-text" text-anchor="middle">Feed Forward</Text>
+    <text x="625" y="150" class="card-text" text-anchor="middle">GeLU Activation</Text>
+    <text x="625" y="165" class="card-text" text-anchor="middle">4× hidden dim</Text>
+
+    <g>
+      <circle cx="625" cy="195" r="7" fill="url(#nodeGrad3)" opacity="0.9"/>
+      <circle cx="625" cy="215" r="10" fill="url(#nodeGrad3)" opacity="0.7" style="animation: nodePulse 2s ease-in-out infinite; animation-delay: 0.3s"/>
+      <circle cx="625" cy="238" r="7" fill="url(#nodeGrad3)" opacity="0.8" style="animation: nodePulse 2s ease-in-out infinite; animation-delay: 0.6s"/>
+      <circle cx="625" cy="258" r="10" fill="url(#nodeGrad3)" opacity="0.6" style="animation: nodePulse 2s ease-in-out infinite; animation-delay: 0.9s"/>
+      <circle cx="625" cy="278" r="7" fill="url(#nodeGrad3)" opacity="0.7" style="animation: nodePulse 2s ease-in-out infinite; animation-delay: 1.2s"/>
+      <text x="625" y="199" class="node-label" font-size="8" fill="#fff">h₁</text>
+      <text x="625" y="230" class="node-label" font-size="7" fill="#fff">h₂</text>
+      <text x="625" y="252" class="node-label" font-size="7" fill="#fff">h₃</text>
+      <text x="625" y="272" class="node-label" font-size="8" fill="#fff">...</text>
+    </g>
+  </g>
+
+  <!-- Connection lines -->
+  <g stroke="#4f46e5" stroke-width="0.5" opacity="0.3">
+    <line x1="325" y1="195" x2="342" y2="195"/>
+    <line x1="325" y1="220" x2="342" y2="220"/>
+    <line x1="325" y1="245" x2="342" y2="245"/>
+    <line x1="325" y1="270" x2="342" y2="270"/>
+    <line x1="530" y1="195" x2="547" y2="195"/>
+    <line x1="530" y1="220" x2="547" y2="220"/>
+    <line x1="530" y1="245" x2="547" y2="245"/>
+    <line x1="530" y1="270" x2="547" y2="270"/>
+  </g>
+
+  <!-- Output Layer -->
+  <g>
+    <rect x="720" y="90" width="140" height="200" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="725" y="95" width="130" height="4" rx="2" fill="url(#nodeGrad1)"/>
+    <text x="790" y="118" class="card-title" text-anchor="middle">OUTPUT LAYER</text>
+    <text x="790" y="135" class="card-text" text-anchor="middle">Claim Detection</Text>
+    <text x="790" y="150" class="card-text" text-anchor="middle">Classification</Text>
+    <text x="790" y="165" class="card-text" text-anchor="middle">Timestamp Reg.</Text>
+
+    <g font-size="9" fill="#e0e7ff" text-anchor="middle">
+      <rect x="745" y="180" width="90" height="22" rx="4" fill="#2d1b69" stroke="#818cf8" stroke-width="0.5"/>
+      <text x="790" y="195" fill="#a78bfa">CLAIM / NO CLAIM</text>
+
+      <rect x="745" y="210" width="90" height="22" rx="4" fill="#2d1b69" stroke="#f472b6" stroke-width="0.5"/>
+      <text x="790" y="225" fill="#f472b6">START_TIMESTAMP</text>
+
+      <rect x="745" y="240" width="90" height="22" rx="4" fill="#2d1b69" stroke="#38bdf8" stroke-width="0.5"/>
+      <text x="790" y="255" fill="#38bdf8">END_TIMESTAMP</text>
+
+      <rect x="745" y="270" width="90" height="22" rx="4" fill="#2d1b69" stroke="#a78bfa" stroke-width="0.5"/>
+      <text x="790" y="285" fill="#c4b5fd">CONFIDENCE</text>
+    </g>
+  </g>
+
+  <!-- Connection to output -->
+  <g stroke="#4f46e5" stroke-width="0.5" opacity="0.3">
+    <line x1="712" y1="195" x2="742" y2="195"/>
+    <line x1="712" y1="220" x2="742" y2="220"/>
+    <line x1="712" y1="245" x2="742" y2="245"/>
+    <line x1="712" y1="270" x2="742" y2="270"/>
+  </g>
+
+  <!-- Side cards: Training and Inference -->
+  <g>
+    <rect x="40" y="315" width="220" height="140" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="45" y="320" width="210" height="3" rx="1.5" fill="url(#nodeGrad1)"/>
+    <text x="150" y="340" class="card-title" text-anchor="middle">TRAINING</Text>
+    <text x="150" y="358" class="card-text" text-anchor="middle">Loss: BCE + Smooth L1</Text>
+    <text x="150" y="374" class="card-text" text-anchor="middle">Optimizer: AdamW</Text>
+    <text x="150" y="390" class="card-text" text-anchor="middle">LR: 1e-5 to 5e-5</Text>
+    <text x="150" y="406" class="card-text" text-anchor="middle">Batch: 16-32</Text>
+    <text x="150" y="422" class="card-text" text-anchor="middle">Epochs: 3-10</Text>
+
+    <rect x="280" y="315" width="220" height="140" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="285" y="320" width="210" height="3" rx="1.5" fill="url(#nodeGrad4)"/>
+    <text x="390" y="340" class="card-title" text-anchor="middle">INFERENCE</Text>
+    <text x="390" y="358" class="card-text" text-anchor="middle">Beam search: k=5</Text>
+    <text x="390" y="374" class="card-text" text-anchor="middle">Temperature: 0.7</Text>
+    <text x="390" y="390" class="card-text" text-anchor="middle">Top-p: 0.9</Text>
+    <text x="390" y="406" class="card-text" text-anchor="middle">Max tokens: 2048</Text>
+    <text x="390" y="422" class="card-text" text-anchor="middle">Streaming: yes</Text>
+
+    <rect x="520" y="315" width="150" height="140" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="525" y="320" width="140" height="3" rx="1.5" fill="url(#nodeGrad2)"/>
+    <text x="595" y="340" class="card-title" text-anchor="middle">PROVIDERS</Text>
+    <text x="595" y="358" class="card-text" text-anchor="middle">GPT-4 / Claude</Text>
+    <text x="595" y="374" class="card-text" text-anchor="middle">Gemini / Llama</Text>
+    <text x="595" y="390" class="card-text" text-anchor="middle">Mock (testing)</Text>
+
+    <rect x="690" y="315" width="170" height="140" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="695" y="320" width="160" height="3" rx="1.5" fill="url(#nodeGrad3)"/>
+    <text x="775" y="340" class="card-title" text-anchor="middle">OUTPUT FORMAT</Text>
+    <text x="775" y="358" class="card-text" text-anchor="middle">JSON schema</Text>
+    <text x="775" y="374" class="card-text" text-anchor="middle">{claims: [...]}</Text>
+    <text x="775" y="390" class="card-text" text-anchor="middle">timestamps</Text>
+    <text x="775" y="406" class="card-text" text-anchor="middle">confidence</Text>
+    <text x="775" y="422" class="card-text" text-anchor="middle">metadata</Text>
+  </g>
+
+  <!-- Bottom: Pipeline flow -->
+  <g>
+    <rect x="40" y="475" width="820" height="90" rx="10" class="card" filter="url(#cardShadow)"/>
+    <rect x="45" y="480" width="810" height="3" rx="1.5" fill="url(#formulaGrad)"/>
+    <text x="450" y="500" class="card-title" text-anchor="middle">PROCESSING PIPELINE</Text>
+
+    <g font-size="10" fill="#a5b4fc" text-anchor="middle">
+      <rect x="60" y="515" width="80" height="24" rx="4" fill="#1a1535" stroke="#818cf8" stroke-width="0.5"/>
+      <text x="100" y="531" fill="#a78bfa">Audio → Text</text>
+
+      <rect x="155" y="515" width="80" height="24" rx="4" fill="#1a1535" stroke="#c084fc" stroke-width="0.5"/>
+      <text x="195" y="531" fill="#c084fc">Chunk</text>
+
+      <rect x="250" y="515" width="80" height="24" rx="4" fill="#1a1535" stroke="#f472b6" stroke-width="0.5"/>
+      <text x="290" y="531" fill="#f472b6">Embed</Text>
+
+      <rect x="345" y="515" width="80" height="24" rx="4" fill="#1a1535" stroke="#38bdf8" stroke-width="0.5"/>
+      <text x="385" y="531" fill="#38bdf8">Attend</Text>
+
+      <rect x="440" y="515" width="80" height="24" rx="4" fill="#1a1535" stroke="#a78bfa" stroke-width="0.5"/>
+      <text x="480" y="531" fill="#a78bfa">Classify</Text>
+
+      <rect x="535" y="515" width="80" height="24" rx="4" fill="#1a1535" stroke="#f472b6" stroke-width="0.5"/>
+      <text x="575" y="531" fill="#f472b6">Extract</Text>
+
+      <rect x="630" y="515" width="80" height="24" rx="4" fill="#1a1535" stroke="#38bdf8" stroke-width="0.5"/>
+      <text x="670" y="531" fill="#38bdf8">Validate</Text>
+
+      <rect x="725" y="515" width="100" height="24" rx="4" fill="#1a1535" stroke="#c084fc" stroke-width="0.5"/>
+      <text x="775" y="531" fill="#c084fc">Store Claims</Text>
+    </g>
+
+    <!-- Flow arrows -->
+    <g stroke="#4f46e5" stroke-width="1" fill="none" opacity="0.4">
+      <path d="M 145,527 L 150,527" marker-end="url(#arrow)"/>
+      <path d="M 240,527 L 245,527" marker-end="url(#arrow)"/>
+      <path d="M 335,527 L 340,527" marker-end="url(#arrow)"/>
+      <path d="M 430,527 L 435,527" marker-end="url(#arrow)"/>
+      <path d="M 525,527 L 530,527" marker-end="url(#arrow)"/>
+      <path d="M 620,527 L 625,527" marker-end="url(#arrow)"/>
+      <path d="M 715,527 L 720,527" marker-end="url(#arrow)"/>
+    </g>
+  </g>
+
+  <!-- Decorative corner accents -->
+  <g stroke="#818cf8" stroke-width="2" opacity="0.4">
+    <polyline points="20,20 20,50 50,50" fill="none"/>
+    <polyline points="880,20 880,50 850,50" fill="none"/>
+    <polyline points="20,560 20,530 50,530" fill="none"/>
+    <polyline points="880,560 880,530 850,530" fill="none"/>
+  </g>
+
+  <!-- Bottom tagline -->
+  <text x="450" y="575" text-anchor="middle" font-size="10" fill="#4f46e5" opacity="0.5" letter-spacing="2">
+    transformer · attention · feed-forward · claim detection
+  </text>
+</svg>

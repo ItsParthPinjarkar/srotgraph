@@ -1,0 +1,379 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#0f1d35"/>
+    </linearGradient>
+    <linearGradient id="pipelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="25%" style="stop-color:#818cf8"/>
+      <stop offset="50%" style="stop-color:#f472b6"/>
+      <stop offset="75%" style="stop-color:#38bdf8"/>
+      <stop offset="100%" style="stop-color:#818cf8"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c1929"/>
+      <stop offset="100%" style="stop-color:#112240"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1040"/>
+      <stop offset="100%" style="stop-color:#251a4a"/>
+    </linearGradient>
+    <linearGradient id="cardGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f2030"/>
+      <stop offset="100%" style="stop-color:#1a2d40"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="innerGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in2="SourceGraphic" operator="out"/>
+      <feColorMatrix values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 1  0 0 0 0.5 0"/>
+      <feBlend in2="SourceGraphic" mode="screen"/>
+    </filter>
+    <style>
+      text { font-family: 'Segoe UI', system-ui, sans-serif; }
+      .title { font-size: 24px; font-weight: 700; fill: #e0f2fe; letter-spacing: 2; }
+      .subtitle { font-size: 11px; fill: #7dd3fc; letter-spacing: 3; }
+      .section-label { font-size: 13px; fill: #38bdf8; font-weight: 600; }
+      .card-title { font-size: 13px; fill: #e0f2fe; font-weight: 600; }
+      .card-text { font-size: 11px; fill: #93c5fd; }
+      .card-small { font-size: 10px; fill: #60a5fa; }
+      .icon-label { font-size: 9px; fill: #7dd3fc; text-anchor: middle; }
+      .stat { font-size: 16px; font-weight: 700; fill: #f0f9ff; }
+      .stat-label { font-size: 10px; fill: #7dd3fc; }
+      .card { fill: #0c1929; stroke: #1e3a5f; stroke-width: 1; }
+      .arrow { stroke: #38bdf8; stroke-width: 2; fill: none; opacity: 0.6; }
+      .arrow-head { fill: #38bdf8; }
+      @keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+      @keyframes glow-pulse { 0%,100% { filter: url(#glow); opacity: 0.7; } 50% { filter: url(#glow); opacity: 1; } }
+      @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+      @keyframes flow { 0% { stroke-dashoffset: 20; } 100% { stroke-dashoffset: 0; } }
+      .node-pulse { animation: pulse 2s ease-in-out infinite; }
+      .glow-anim { animation: glow-pulse 3s ease-in-out infinite; }
+      .float-anim { animation: float 3s ease-in-out infinite; }
+      .flow-line { animation: flow 1.5s linear infinite; stroke-dasharray: 8,4; }
+      .card-anim { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+      .card:nth-child(8) { animation-delay: 0.1s; }
+      .card:nth-child(9) { animation-delay: 0.2s; }
+      .card:nth-child(10) { animation-delay: 0.3s; }
+      .card:nth-child(11) { animation-delay: 0.4s; }
+      .card:nth-child(12) { animation-delay: 0.5s; }
+      .card:nth-child(13) { animation-delay: 0.6s; }
+      .card:nth-child(14) { animation-delay: 0.7s; }
+      .card:nth-child(15) { animation-delay: 0.8s; }
+      .card:nth-child(16) { animation-delay: 0.9s; }
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; opacity: 1 !important; }
+      }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M 0 0 L 8 3 L 0 6 Z" fill="#38bdf8" opacity="0.6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="600" rx="12" fill="url(#bgGrad)"/>
+
+  <!-- Background pattern -->
+  <g opacity="0.08">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#38bdf8" stroke-width="0.5"/>
+    </pattern>
+    <rect width="900" height="600" fill="url(#grid)"/>
+  </g>
+
+  <!-- Title section -->
+  <g>
+    <text x="450" y="38" text-anchor="middle" class="title">Evidence Gathering Pipeline</text>
+    <text x="450" y="55" text-anchor="middle" class="subtitle">FROM RAW MEDIA TO VERIFIED CLAIMS</Text>
+    <line x1="200" y1="66" x2="700" y2="66" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- ===== TOP ROW: Source Types ===== -->
+  <!-- Audio Source -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="40" y="90" width="150" height="120" rx="10" fill="url(#cardGrad1)"/>
+    <rect x="45" y="95" width="140" height="3" rx="1.5" fill="#0ea5e9"/>
+    <!-- Audio icon -->
+    <g transform="translate(115, 120)">
+      <rect x="-3" y="-12" width="6" height="8" rx="1" fill="#0ea5e9"/>
+      <rect x="-3" y="-4" width="6" height="8" rx="1" fill="#38bdf8"/>
+      <rect x="-3" y="4" width="6" height="8" rx="1" fill="#60a5fa"/>
+      <rect x="-6" y="-8" width="3" height="3" rx="1" fill="#7dd3fc"/>
+      <rect x="-6" y="2" width="3" height="3" rx="1" fill="#7dd3fc"/>
+      <rect x="3" y="-8" width="3" height="3" rx="1" fill="#7dd3fc"/>
+      <rect x="3" y="2" width="3" height="3" rx="1" fill="#7dd3fc"/>
+    </g>
+    <text x="115" y="155" class="icon-label">AUDIO</text>
+    <text x="115" y="170" class="card-small" text-anchor="middle">MP3 · WAV · M4A</text>
+    <text x="115" y="182" class="card-small" text-anchor="middle">Speech-to-Text</text>
+  </g>
+
+  <!-- Video Source -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="215" y="90" width="150" height="120" rx="10" fill="url(#cardGrad2)"/>
+    <rect x="220" y="95" width="140" height="3" rx="1.5" fill="#818cf8"/>
+    <!-- Video icon -->
+    <g transform="translate(290, 125)">
+      <rect x="-15" y="-10" width="22" height="16" rx="3" fill="none" stroke="#818cf8" stroke-width="2"/>
+      <polygon points="0,0 -5,-8 -5,8" fill="#f472b6" opacity="0.8"/>
+    </g>
+    <text x="290" y="155" class="icon-label">VIDEO</text>
+    <text x="290" y="170" class="card-small" text-anchor="middle">MP4 · MKV · MOV</text>
+    <text x="290" y="182" class="card-small" text-anchor="middle">Extract Audio</text>
+  </g>
+
+  <!-- Text Source -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="390" y="90" width="150" height="120" rx="10" fill="url(#cardGrad3)"/>
+    <rect x="395" y="95" width="140" height="3" rx="1.5" fill="#f472b6"/>
+    <!-- Text icon -->
+    <g transform="translate(465, 120)" fill="#f472b6">
+      <rect x="-12" y="-10" width="24" height="4" rx="1"/>
+      <rect x="-12" y="-4" width="18" height="4" rx="1"/>
+      <rect x="-12" y="2" width="20" height="4" rx="1"/>
+      <rect x="-12" y="8" width="14" height="4" rx="1"/>
+    </g>
+    <text x="465" y="155" class="icon-label">TEXT</text>
+    <text x="465" y="170" class="card-small" text-anchor="middle">RSS · API · Web</text>
+    <text x="465" y="182" class="card-small" text-anchor="middle">Direct Ingestion</text>
+  </g>
+
+  <!-- Handling Source -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="565" y="90" width="150" height="120" rx="10" fill="url(#cardGrad1)"/>
+    <rect x="570" y="95" width="140" height="3" rx="1.5" fill="#38bdf8"/>
+    <!-- Database icon -->
+    <g transform="translate(640, 118)">
+      <ellipse cx="0" cy="-8" rx="10" ry="4" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+      <path d="M -10,-8 L -10,8 A 10,4 0 0 0 10,8 L 10,-8" fill="none" stroke="#7dd3fc" stroke-width="1.5"/>
+      <ellipse cx="0" cy="8" rx="10" ry="4" fill="none" stroke="#7dd3fc" stroke-width="1.5"/>
+    </g>
+    <text x="640" y="155" class="icon-label">DATABASE</text>
+    <text x="640" y="170" class="card-small" text-anchor="middle">SQL · NoSQL</Text>
+    <text x="640" y="182" class="card-small" text-anchor="middle">Query Results</Text>
+  </g>
+
+  <!-- Live Feed -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="740" y="90" width="120" height="120" rx="10" fill="url(#cardGrad2)"/>
+    <rect x="745" y="95" width="110" height="3" rx="1.5" fill="#f472b6"/>
+    <!-- Live icon -->
+    <g transform="translate(800, 125)">
+      <circle cx="0" cy="0" r="6" fill="none" stroke="#f472b6" stroke-width="2"/>
+      <circle cx="0" cy="0" r="2" fill="#f472b6" class="node-pulse"/>
+      <line x1="8" y1="0" x2="14" y2="0" stroke="#f472b6" stroke-width="2"/>
+    </g>
+    <text x="800" y="155" class="icon-label">LIVE FEED</text>
+    <text x="800" y="170" class="card-small" text-anchor="middle">Stream</Text>
+    <text x="800" y="182" class="card-small" text-anchor="middle">(Future)</Text>
+  </g>
+
+  <!-- Arrows from sources to processing -->
+  <g class="arrow">
+    <path d="M 115,210 L 115,240 L 180,240 L 180,260"/>
+    <path d="M 290,210 L 290,240 L 180,240" marker-end="url(#arrow-head)"/>
+    <path d="M 465,210 L 465,240 L 420,240 L 420,260" marker-end="url(#arrow-head)"/>
+    <path d="M 640,210 L 640,240 L 580,240 L 580,260" marker-end="url(#arrow-head)"/>
+    <path d="M 800,210 L 800,240 L 720,240 L 720,260" marker-end="url(#arrow-head)"/>
+  </g>
+
+  <!-- ===== SECOND ROW: Processing Stages ===== -->
+  <!-- Stage 1: Ingestion -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="40" y="270" width="200" height="80" rx="10" fill="url(#cardGrad1)"/>
+    <rect x="45" y="275" width="190" height="3" rx="1.5" fill="#0ea5e9"/>
+    <text x="140" y="295" class="card-title" text-anchor="middle">📥 INGESTION</Text>
+    <text x="140" y="312" class="card-text" text-anchor="middle">File upload / URL fetch</Text>
+    <text x="140" y="326" class="card-small" text-anchor="middle">Validation · Type detection</Text>
+    <!-- Status indicator -->
+    <circle cx="70" cy="310" r="4" fill="#22c55e" opacity="0.8"/>
+    <text x="82" y="313" class="card-small" fill="#22c55e">ready</text>
+  </g>
+
+  <!-- Stage 2: Transcription -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="265" y="270" width="200" height="80" rx="10" fill="url(#cardGrad2)"/>
+    <rect x="270" y="275" width="190" height="3" rx="1.5" fill="#818cf8"/>
+    <text x="365" y="295" class="card-title" text-anchor="middle">🎙 TRANSCRIPTION</Text>
+    <text x="365" y="312" class="card-text" text-anchor="middle">Speech → Text</Text>
+    <text x="365" y="326" class="card-small" text-anchor="middle">Whisper · DeepGram · AssemblyAI</text>
+    <!-- Waveform -->
+    <g transform="translate(315, 330)" stroke="#818cf8" stroke-width="1.5" fill="none">
+      <path d="M 0,5 L 5,-3 L 10,4 L 15,-5 L 20,3 L 25,-2 L 30,5 L 35,-4 L 40,2 L 45,-3 L 50,4"/>
+    </g>
+  </g>
+
+  <!-- Stage 3: Claim Extraction -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="490" y="270" width="200" height="80" rx="10" fill="url(#cardGrad3)"/>
+    <rect x="495" y="275" width="190" height="3" rx="1.5" fill="#f472b6"/>
+    <text x="590" y="295" class="card-title" text-anchor="middle">🤖 CLAIM EXTRACTION</Text>
+    <text x="590" y="312" class="card-text" text-anchor="middle">LLM-based detection</Text>
+    <text x="590" y="326" class="card-small" text-anchor="middle">GPT-4 · Claude · Gemini</Text>
+    <!-- Brain icon -->
+    <g transform="translate(540, 322)" fill="#f472b6" opacity="0.7">
+      <path d="M0,-5 C-8,-5 -10,-1 -10,3 C-10,7 -6,10 -3,8 C0,10 4,8 4,4 C4,0 0,-2 0,-5 Z"/>
+      <path d="M-3,-2 C-4,2 -3,5 -1,6"/>
+      <path d="M3,-2 C4,2 3,5 1,6"/>
+    </g>
+  </g>
+
+  <!-- Stage 4: Evidence Collection -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="715" y="270" width="145" height="80" rx="10" fill="url(#cardGrad1)"/>
+    <rect x="720" y="275" width="135" height="3" rx="1.5" fill="#38bdf8"/>
+    <text x="787" y="295" class="card-title" text-anchor="middle">🔍 EVIDENCE</Text>
+    <text x="787" y="312" class="card-text" text-anchor="middle">Gathering</Text>
+    <text x="787" y="326" class="card-small" text-anchor="middle">Transcript · Snapshots</Text>
+    <!-- Magnifier icon -->
+    <g transform="translate(755, 300)" stroke="#38bdf8" stroke-width="2" fill="none">
+      <circle cx="0" cy="0" r="5"/>
+      <line x1="4" y1="4" x2="9" y2="9"/>
+    </g>
+  </g>
+
+  <!-- Arrows between processing stages -->
+  <g class="arrow flow-line">
+    <path d="M 240,310 L 265,310"/>
+    <path d="M 465,310 L 490,310"/>
+    <path d="M 690,310 L 715,310"/>
+  </g>
+
+  <!-- ===== THIRD ROW: Evidence Sources ===== -->
+  <g>
+    <text x="450" y="375" text-anchor="middle" class="section-label">EVIDENCE SOURCES</Text>
+    <line x1="300" y1="383" x2="600" y2="383" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- Evidence cards in a row -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="40" y="400" width="110" height="70" rx="8" fill="url(#cardGrad1)"/>
+    <text x="95" y="420" class="card-title" text-anchor="middle">Transcript</Text>
+    <text x="95" y="436" class="card-small" text-anchor="middle">Context</Text>
+    <text x="95" y="448" class="card-small" text-anchor="middle">Segments</Text>
+    <rect x="70" y="453" width="50" height="3" rx="1.5" fill="#0ea5e9" opacity="0.5"/>
+  </g>
+
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="165" y="400" width="110" height="70" rx="8" fill="url(#cardGrad2)"/>
+    <text x="220" y="420" class="card-title" text-anchor="middle">Metadata</Text>
+    <text x="220" y="436" class="card-small" text-anchor="middle">File info</Text>
+    <text x="220" y="448" class="card-small" text-anchor="middle">EXIF · Duration</Text>
+    <rect x="200" y="453" width="40" height="3" rx="1.5" fill="#818cf8" opacity="0.5"/>
+  </g>
+
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="290" y="400" width="110" height="70" rx="8" fill="url(#cardGrad3)"/>
+    <text x="345" y="420" class="card-title" text-anchor="middle">Snapshots</Text>
+    <text x="345" y="436" class="card-small" text-anchor="middle">Video frames</Text>
+    <text x="345" y="448" class="card-small" text-anchor="middle">Key moments</Text>
+    <rect x="320" y="453" width="50" height="3" rx="1.5" fill="#f472b6" opacity="0.5"/>
+  </g>
+
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="415" y="400" width="110" height="70" rx="8" fill="url(#cardGrad1)"/>
+    <text x="470" y="420" class="card-title" text-anchor="middle">References</Text>
+    <text x="470" y="436" class="card-small" text-anchor="middle">URLs</Text>
+    <text x="470" y="448" class="card-small" text-anchor="middle">Docs · Sources</Text>
+    <rect x="445" y="453" width="50" height="3" rx="1.5" fill="#38bdf8" opacity="0.5"/>
+  </g>
+
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="540" y="400" width="110" height="70" rx="8" fill="url(#cardGrad2)"/>
+    <text x="595" y="420" class="card-title" text-anchor="middle">Human</Text>
+    <text x="595" y="436" class="card-small" text-anchor="middle">Annotations</Text>
+    <text x="595" y="448" class="card-small" text-anchor="middle">Reviews</Text>
+    <rect x="575" y="453" width="40" height="3" rx="1.5" fill="#f472b6" opacity="0.5"/>
+  </g>
+
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="665" y="400" width="110" height="70" rx="8" fill="url(#cardGrad3)"/>
+    <text x="720" y="420" class="card-title" text-anchor="middle">Corroboration</Text>
+    <text x="720" y="436" class="card-small" text-anchor="middle">Cross-ref</Text>
+    <text x="720" y="448" class="card-small" text-anchor="middle">Multiple sources</Text>
+    <rect x="700" y="453" width="40" height="3" rx="1.5" fill="#0ea5e9" opacity="0.5"/>
+  </g>
+
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="790" y="400" width="70" height="70" rx="8" fill="url(#cardGrad1)"/>
+    <text x="825" y="425" class="card-title" text-anchor="middle">+ More</Text>
+    <text x="825" y="445" class="card-small" text-anchor="middle">Extensible</Text>
+  </g>
+
+  <!-- Arrows from evidence sources down -->
+  <g class="arrow">
+    <path d="M 95,470 L 95,490 L 200,490"/>
+    <path d="M 95,470 L 200,470" marker-end="url(#arrow-head)"/>
+  </g>
+
+  <!-- ===== BOTTOM ROW: Verification & Storage ===== -->
+  <!-- Verification Engine -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="60" y="505" width="280" height="80" rx="10" fill="url(#cardGrad2)"/>
+    <rect x="65" y="510" width="270" height="3" rx="1.5" fill="#22c55e"/>
+    <text x="200" y="530" class="card-title" text-anchor="middle">✅ VERIFICATION ENGINE</Text>
+    <text x="200" y="548" class="card-text" text-anchor="middle">Cross-reference evidence</Text>
+    <text x="200" y="562" class="card-small" text-anchor="middle">Source reliability scoring</Text>
+    <!-- Checkmark icon -->
+    <g transform="translate(80, 535)" stroke="#22c55e" stroke-width="2" fill="none">
+      <circle cx="0" cy="0" r="6"/>
+      <path d="M-3,0 L-1,2 L4,-2" stroke="#22c55e" stroke-width="2" fill="none"/>
+    </g>
+  </g>
+
+  <!-- Storage & Index -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="360" y="505" width="280" height="80" rx="10" fill="url(#cardGrad3)"/>
+    <rect x="365" y="510" width="270" height="3" rx="1.5" fill="#818cf8"/>
+    <text x="500" y="530" class="card-title" text-anchor="middle">💾 STORAGE & INDEX</Text>
+    <text x="500" y="548" class="card-text" text-anchor="middle">PostgreSQL · Object Storage</Text>
+    <text x="500" y="562" class="card-small" text-anchor="middle">Claim graph · Version history</Text>
+    <!-- Database icon -->
+    <g transform="translate(420, 535)">
+      <ellipse cx="0" cy="-6" rx="7" ry="3" fill="none" stroke="#818cf8" stroke-width="1.5"/>
+      <path d="M-7,-6 L-7,6 A 7,3 0 0 0 7,6 L 7,-6" fill="none" stroke="#7dd3fc" stroke-width="1.5"/>
+      <ellipse cx="0" cy="6" rx="7" ry="3" fill="none" stroke="#7dd3fc" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <!-- Metrics & Analytics -->
+  <g class="card card-anim" filter="url(#cardShadow)">
+    <rect x="660" y="505" width="200" height="80" rx="10" fill="url(#cardGrad2)"/>
+    <rect x="665" y="510" width="190" height="3" rx="1.5" fill="#f472b6"/>
+    <text x="760" y="530" class="card-title" text-anchor="middle">📊 METRICS</Text>
+    <text x="760" y="548" class="card-text" text-anchor="middle">Accuracy · Latency</Text>
+    <text x="760" y="562" class="card-small" text-anchor="middle">Info loss tracking</Text>
+    <!-- Chart icon -->
+    <g transform="translate(700, 535)" fill="#f472b6" opacity="0.7">
+      <rect x="0" y="8" width="4" height="8"/>
+      <rect x="7" y="4" width="4" height="12"/>
+      <rect x="14" y="0" width="4" height="16"/>
+      <rect x="21" y="6" width="4" height="10"/>
+      <rect x="28" y="2" width="4" height="14"/>
+    </g>
+  </g>
+
+  <!-- Arrows from evidence to bottom row -->
+  <g class="arrow">
+    <path d="M 200,470 L 200,490 L 60,490" marker-end="url(#arrow-head)"/>
+    <path d="M 450,470 L 450,490 L 500,490" marker-end="url(#arrow-head)"/>
+    <path d="M 725,470 L 725,490 L 760,490" marker-end="url(#arrow-head)"/>
+    <path d="M 350,470 L 350,490 L 360,490" marker-end="url(#arrow-head)"/>
+  </g>
+
+  <!-- Bottom tagline -->
+  <text x="450" y="595" text-anchor="middle" font-size="10" fill="#38bdf8" opacity="0.5" letter-spacing="2">
+    INGEST · TRANSCRIBE · EXTRACT · EVIDENCE · VERIFY · STORE
+  </text>
+</svg>
