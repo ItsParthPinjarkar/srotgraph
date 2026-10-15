@@ -19,8 +19,6 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-*.manifest
-*.spec
 
 # Virtual environments
 venv/
@@ -39,6 +37,7 @@ env/
 .env
 .env.local
 .env.*.local
+!.env.example
 
 # Testing
 .pytest_cache/
@@ -49,21 +48,20 @@ htmlcov/
 
 # mypy
 .mypy_cache/
-.dmypy.json
-dmypy.json
 
 # ruff
 .ruff_cache/
 
 # Coverage
 .coverage.*
-*.cover
 
 # Node.js
 node_modules/
 .pnp.*
 .pnp.cjs
-.pnpm-store/
+
+# pnpm
+pnpm-store/
 
 # Next.js
 .next/
@@ -93,3 +91,11 @@ temp/
 
 # Local development
 *.local
+
+# API keys and secrets (should be in .env, but just in case)
+*.pem
+*.key
+*.secret
+
+# Editor directories
+.editorconfig

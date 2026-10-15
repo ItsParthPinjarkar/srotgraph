@@ -1,0 +1,13 @@
+{
+  "name": "@srotgraph/contracts",
+  "version": "0.1.0",
+  "description": "Shared JSON data contracts for SrotGraph",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.0"
+  }
+}

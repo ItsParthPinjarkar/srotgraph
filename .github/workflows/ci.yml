@@ -1,0 +1,171 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "uv"
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Install Python dependencies
+        run: |
+          cd apps/api
+          uv sync --extra dev
+          cd ../packages/python
+          uv sync --extra dev
+
+      - name: Run Ruff format check
+        run: |
+          uv run ruff format --check apps/api/src apps/api/tests packages/python/src packages/python/tests
+
+      - name: Run Ruff lint
+        run: |
+          uv run ruff check apps/api/src apps/api/tests packages/python/src packages/python/tests
+
+  python-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "uv"
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Install Python dependencies
+        run: |
+          cd apps/api
+          uv sync --extra dev
+          cd ../packages/python
+          uv sync --extra dev
+
+      - name: Run unit tests (API)
+        run: |
+          cd apps/api
+          uv run pytest tests/ -v
+
+      - name: Run unit tests (Python package)
+        run: |
+          cd packages/python
+          uv run pytest tests/ -v
+
+      - name: Run contract tests
+        run: |
+          cd tests/contract
+          uv run pytest tests/contract/ -v
+
+  typescript-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run TypeScript type check (contracts)
+        run: pnpm --filter @srotgraph/contracts typecheck
+
+      - name: Run TypeScript type check (web)
+        run: pnpm --filter @srotgraph/web typecheck
+
+      - name: Run ESLint (web)
+        run: pnpm --filter @srotgraph/web lint
+
+  build-web:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build web app
+        run: pnpm --filter @srotgraph/web build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:8000
+
+  docker-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build API Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./apps/api/Dockerfile
+          push: false
+          tags: srotgraph-api:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build Web Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./apps/web/Dockerfile
+          push: false
+          tags: srotgraph-web:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  summary:
+    runs-on: ubuntu-latest
+    needs: [lint-and-format, python-tests, typescript-check, build-web, docker-build]
+    
+    steps:
+      - name: All checks passed
+        run: echo "✅ All CI checks passed successfully!"

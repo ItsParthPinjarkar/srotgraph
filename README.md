@@ -4,70 +4,63 @@
 
 SrotGraph processes continuous or recorded audio, video and text streams, extracts timestamped claims, tracks claim evolution, connects evidence and sources, and measures accuracy, latency, memory consumption and information loss.
 
-## Architecture
+## Repository Structure
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        SrotGraph System                         │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐      │
-│  │   Streams    │───▶│  AI Providers │───▶│   Claims     │      │
-│  │  (Audio/     │    │ (Whisper,    │    │  (Timestamped │      │
-│  │   Video/     │    │  DeepGram,   │    │   Assertions) │      │
-│  │   Text)      │    │  AssemblyAI) │    │              │      │
-│  └──────────────┘    └──────────────┘    └──────┬───────┘      │
-│                                                  │              │
-│  ┌──────────────┐    ┌──────────────┐           │              │
-│  │   Metrics    │◀───│  Validation  │◀──────────┘              │
-│  │ (Accuracy/   │    │   Engine     │                         │
-│  │  Latency/    │    └──────────────┘                         │
-│  │  Memory)     │                                            │
-│  └──────────────┘                                            │
-│                                                                  │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │              Data Layer                                     ││
-│  │  PostgreSQL (Claims, Evidence, Sources, History)           ││
-│  │  Redis Streams (Async Job Processing)                      ││
-│  └─────────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────────┘
-```
-
-## Project Structure
+This is a monorepo using pnpm workspaces for the frontend and uv for Python packages.
 
 ```
 srotgraph/
-├── AGENTS.md              # Coding agent rules and guidelines
-├── README.md             # This file
-├── docker-compose.yml    # Full stack deployment
-├── backend/
-│   ├── Dockerfile
-│   ├── pyproject.toml
-│   ├── pytest.ini
-│   ├── .env.example
-│   ├── README.md
-│   ├── srotgraph/
-│   │   ├── __init__.py
-│   │   ├── config.py      # Application settings
-│   │   └── main.py        # FastAPI application entry point
-│   └── tests/
-│       ├── __init__.py
-│       └── test_main.py
-└── frontend/
-    ├── Dockerfile
-    ├── package.json
-    ├── pnpm-lock.yaml
-    ├── .env.local
-    ├── README.md
-    ├── next.config.ts
-    ├── src/
-    │   ├── app/          # Next.js App Router pages
-    │   ├── components/   # React components
-    │   ├── lib/
-    │   │   └── api.ts    # API client
-    │   └── types/
-    │       └── index.ts  # TypeScript type definitions
-    └── ...
+├── apps/
+│   ├── api/              # FastAPI backend
+│   │   ├── src/
+│   │   │   ├── main.py   # Application entry point
+│   │   │   └── config.py # Configuration
+│   │   ├── tests/
+│   │   │   └── test_main.py
+│   │   ├── pyproject.toml
+│   │   └── Dockerfile
+│   └── web/              # Next.js frontend
+│       ├── src/
+│       │   └── app/
+│       │       ├── page.tsx      # Status page
+│       │       ├── layout.tsx    # Root layout
+│       │       ├── globals.css   # Global styles
+│       │       └── api/
+│       │           └── health/
+│       │               └── route.ts  # Health API proxy
+│       ├── package.json
+│       ├── tsconfig.json
+│       └── Dockerfile
+├── packages/
+│   ├── contracts/        # Shared TypeScript data contracts
+│   │   ├── src/
+│   │   │   └── index.ts
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── python/           # Shared Python utilities
+│       ├── src/
+│       │   ├── __init__.py
+│       │   └── config.py
+│       └── pyproject.toml
+├── tests/
+│   ├── unit/             # Unit tests
+│   ├── integration/      # Integration tests
+│   └── contract/         # Contract tests
+├── docs/                 # Documentation
+├── migrations/           # Database migrations (future)
+├── .github/
+│   └── workflows/
+│       └── ci.yml        # CI pipeline
+├── docker-compose.yml    # Local PostgreSQL
+├── pnpm-workspace.yaml   # pnpm workspace config
+├── pyproject.toml        # Root Python config (uv)
+├── .env.example          # Environment template
+├── .gitignore
+├── LICENSE
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── SECURITY.md
+└── README.md
 ```
 
 ## Quick Start
@@ -76,150 +69,119 @@ srotgraph/
 
 - Python 3.12+
 - Node.js 20+
-- pnpm
-- Docker and Docker Compose (optional, for containerized setup)
-- PostgreSQL (optional, for local development)
-- Redis (optional, for async processing)
+- pnpm 9+
+- uv (Python package manager)
+- Docker and Docker Compose (for local PostgreSQL)
 
-### Development Setup
-
-#### 1. Clone and Install
+### Install uv
 
 ```bash
-# Backend
-cd backend
-pip install -e ".[dev]"
+# Install uv (Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
-# Frontend
-cd frontend
+### Install Dependencies
+
+```bash
+# Install all pnpm dependencies
 pnpm install
+
+# Install Python dependencies for API
+cd apps/api
+uv sync --extra dev
+
+# Install Python dependencies for shared package
+cd ../packages/python
+uv sync --extra dev
 ```
 
-#### 2. Configure Environment
-
-Copy `.env.example` to `.env` in the backend directory and adjust as needed:
+### Start PostgreSQL (optional, for development)
 
 ```bash
-cd backend
-cp .env.example .env
+docker-compose up -d
 ```
 
-#### 3. Run the Services
+### Run the API
 
 ```bash
-# Terminal 1: Backend API
-cd backend
-uvicorn srotgraph.main:app --reload
+cd apps/api
+uv run uvicorn srotgraph_api.main:app --reload
+```
 
-# Terminal 2: Frontend
-cd frontend
+The API will be available at http://localhost:8000
+
+- Health: http://localhost:8000/health
+- Docs: http://localhost:8000/docs
+
+### Run the Web App
+
+```bash
+cd apps/web
 pnpm dev
 ```
 
-#### 4. Access the Application
+The web app will be available at http://localhost:3000
 
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
-- API Documentation: http://localhost:8000/docs
+## Development
 
-### Docker Setup
+### Code Quality
 
 ```bash
-# Start all services
-docker-compose up -d
+# Python formatting and linting (using Ruff)
+cd apps/api
+uv run ruff format .
+uv run ruff check .
 
-# View logs
-docker-compose logs -f
+# TypeScript type checking
+cd apps/web
+pnpm typecheck
 
-# Stop all services
-docker-compose down
-```
-
-## API Overview
-
-### Endpoints
-
-| Category | Endpoints | Description |
-|----------|-----------|-------------|
-| Health | `GET /health`, `GET /` | Health checks and API info |
-| Streams | `/api/v1/streams` | Audio/video/text stream management |
-| Claims | `/api/v1/claims` | Timestamped claim extraction and tracking |
-| Evidence | `/api/v1/evidence` | Evidence collection and verification |
-| Sources | `/api/v1/sources` | Source management and reliability scoring |
-| Relationships | `/api/v1/relationships` | Claim relationships and connections |
-| Jobs | `/api/v1/jobs` | Async processing job status |
-| Metrics | `/api/v1/metrics/*` | Processing, accuracy, and performance metrics |
-
-### Type-Safe API Client
-
-The frontend includes a fully typed API client at `src/lib/api.ts` with all endpoints defined. See `src/types/index.ts` for the complete type definitions.
-
-## AI Provider Configuration
-
-SrotGraph supports interchangeable AI providers through environment variables:
-
-### Speech Recognition
-- `mock` — Deterministic mock provider (default, no API key needed)
-- `whisper` — OpenAI Whisper
-- `deepgram` — DeepGram API
-- `assemblyai` — AssemblyAI API
-
-### Claim Extraction
-- `mock` — Deterministic mock provider (default)
-- `openai` — OpenAI GPT models
-- `anthropic` — Anthropic Claude models
-- `google` — Google Gemini models
-
-### Retrieval
-- `mock` — In-memory mock retrieval (default)
-- `pgvector` — PostgreSQL vector search
-- `external` — External vector database
-
-Set the provider and API key via environment variables:
-
-```bash
-# .env
-SPEECH_RECOGNITION_PROVIDER=deepgram
-DEEPGRAM_API_KEY=your_api_key_here
-
-CLAIM_EXTRACTION_PROVIDER=openai
-OPENAI_API_KEY=your_api_key_here
-```
-
-## Development Guidelines
-
-See [AGENTS.md](AGENTS.md) for the complete coding agent rules:
-
-1. Work on one milestone at a time
-2. Define typed interfaces before integrating components
-3. Use mock providers for testing, never require paid APIs for tests
-4. Preserve timestamps, provenance, and historical claim versions
-5. Treat AI-generated claims as uncertain proposals until validated
-6. Write automated tests for all new functionality
-
-## Testing
-
-### Backend Tests
-
-```bash
-cd backend
-pytest
-```
-
-### Frontend Type Checking
-
-```bash
-cd frontend
-npx tsc --noEmit
-```
-
-### Frontend linting
-
-```bash
-cd frontend
+# ESLint
+cd apps/web
 pnpm lint
 ```
 
+### Tests
+
+```bash
+# Run API unit tests
+cd apps/api
+uv run pytest tests/ -v
+
+# Run Python package tests
+cd packages/python
+uv run pytest tests/ -v
+
+# Run contract tests
+cd tests/contract
+uv run pytest tests/contract/ -v
+
+# Run TypeScript/Next.js tests (when added)
+cd apps/web
+pnpm test
+```
+
+## Project Conventions
+
+- **Python**: Use `uv` for dependency management, `ruff` for linting/formatting
+- **TypeScript**: Strict mode, ESLint with Next.js config
+- **Shared types**: Defined in `packages/contracts` and used by both apps
+- **API design**: REST with JSON, versioned via URL prefix (`/api/v1/`)
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md) - System design and component responsibilities
+- [Data Model](docs/DATA_MODEL.md) - Database schema and entity relationships
+- [Roadmap](docs/ROADMAP.md) - Implementation phases and priorities
+
 ## License
 
-This project is open source. See the LICENSE file for details.
+MIT License - see [LICENSE](LICENSE) for details.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Security
+
+See [SECURITY.md](SECURITY.md) for security reporting instructions.
