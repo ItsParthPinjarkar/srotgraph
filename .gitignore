@@ -99,3 +99,7 @@ temp/
 
 # Editor directories
 .editorconfig
+
+# Allow SVG assets in root
+!assets/*.svg
+

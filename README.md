@@ -1,8 +1,20 @@
 # SrotGraph
 
+![SrotGraph Animated Logo](assets/srotgraph-logo.svg)
+
 **Evidence-Preserving Intelligence System**
 
 SrotGraph processes continuous or recorded audio, video and text streams, extracts timestamped claims, tracks claim evolution, connects evidence and sources, and measures accuracy, latency, memory consumption and information loss.
+
+---
+
+## System Architecture
+
+![SrotGraph Architecture](assets/architecture-diagram.svg)
+
+---
+
+
 
 ## Repository Structure
 
